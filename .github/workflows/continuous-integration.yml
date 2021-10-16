@@ -16,8 +16,10 @@ jobs:
       - name: Compile
         run: | 
           mvn install
+          mvn test -DskipTests=false -Dgroups=fast
           git checkout ${GITHUB_REF#refs/heads/}
           git rebase origin/master
           git branch master
           git push origin master:master
           git push origin :${GITHUB_REF#refs/heads/}
+
