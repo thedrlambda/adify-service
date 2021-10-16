@@ -10,6 +10,7 @@ class Adify {
     this.service = service;
   }
 
+  // YESTSETSE
   String fetch(String productId) {
     try {
       String content = service.get("?product=" + productId);
