@@ -14,9 +14,13 @@ jobs:
           token: ${{secrets.KEY}}
 
       - name: Compile
-        run: | 
-          mvn install
-          mvn test -DskipTests=false -Dgroups=fast
+        run: mvn install
+
+      - name: Test
+        run: mvn test -DskipTests=false -Dgroups=fast
+
+      - name: Merge
+        run: |
           git checkout ${GITHUB_REF#refs/heads/}
           git rebase origin/master
           git branch master
