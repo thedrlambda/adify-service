@@ -1,4 +1,4 @@
-name: Continuous Deployment
+name: Deploy
 on:
   push:
     branches:
@@ -11,4 +11,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run slow tests
         run: mvn test -DskipTests=false -Dgroups=slow
+
+      - name: Push to release
+        run: |
+          git checkout ${GITHUB_REF#refs/heads/}
+          git rebase origin/release
+          git branch release
+          git push origin release:release
+          git push origin :${GITHUB_REF#refs/heads/}
 

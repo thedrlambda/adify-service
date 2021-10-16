@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Integrate
 on:
   push:
     branches:
@@ -16,10 +16,10 @@ jobs:
       - name: Compile
         run: mvn install
 
-      - name: Test
+      - name: Run the fast test
         run: mvn test -DskipTests=false -Dgroups=fast
 
-      - name: Merge
+      - name: Push to master
         run: |
           git checkout ${GITHUB_REF#refs/heads/}
           git rebase origin/master
